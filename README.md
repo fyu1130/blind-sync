@@ -30,7 +30,12 @@ blind-sync/
 │   └── data.js      # 質問・初期点（仮）
 ├── data/
 │   ├── questions.json
-│   ├── initial_scores.json
+│   ├── initial_scores/
+│   │   ├ time.json
+│   │   ├ money.json
+│   │   ├ social.json
+│   │   └ lifestyle.json
+│   ├── advice.json
 │   └── advice.json
 └── README.md
 ```

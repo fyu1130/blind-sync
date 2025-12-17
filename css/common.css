@@ -1,0 +1,23 @@
+/* common.css */
+body {
+    margin: 0;
+    font-family: system-ui, sans-serif;
+}
+
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background: #252541;
+    color: white;
+}
+
+.card {
+    width: 100%;
+    max-width: 650px;
+    background: #393950;
+    border-radius: 16px;
+    padding: 1rem;
+    box-shadow: 0 0 40px rgba(0, 0, 0, 0.35);
+}

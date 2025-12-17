@@ -1,0 +1,34 @@
+/* result.css */
+.resultRow {
+    background: #2f314d;
+    padding: 1rem;
+    margin-bottom: 10px;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.pair {
+    width: 35%;
+    font-weight: bold;
+}
+
+.gaugeWrapper {
+    flex: 1;
+    height: 12px;
+    background: #151525;
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+.gauge {
+    height: 100%;
+    background: #4ecca3;
+}
+
+.score {
+    width: 50px;
+    text-align: right;
+    font-weight: bold;
+}

@@ -1,0 +1,26 @@
+/* questions.css */
+.question {
+    font-size: 1.2rem;
+    margin: 1.2rem 0;
+}
+
+.options {
+    display: flex;
+    flex-direction: column;
+    gap: 0.8rem;
+}
+
+.optionBtn {
+    background: #4ecca3;
+    border: none;
+    padding: 12px;
+    border-radius: 10px;
+    font-weight: bold;
+    cursor: pointer;
+    color: #0f0f1a;
+}
+
+.progress {
+    margin-top: 1rem;
+    opacity: 0.8;
+}

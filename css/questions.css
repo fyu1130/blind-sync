@@ -1,26 +1,109 @@
-/* questions.css */
-.question {
-    font-size: 1.2rem;
-    margin: 1.2rem 0;
+/* ===============================
+   questions.css（UI強化版）
+   =============================== */
+
+/* 全体 */
+.question-container {
+    background: #3a3b54;
+    border-radius: 20px;
+    padding: 2rem;
 }
 
+/* タイトル */
+.question-title {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-size: 1.9rem;
+    font-weight: 800;
+    margin-bottom: 1.2rem;
+}
+
+.question-title span {
+    color: #ff5c7c;
+    /* ? マーク想定 */
+}
+
+/* 参加者・進捗情報 */
+.status {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    font-size: 0.95rem;
+    color: #cfcfe6;
+    margin-bottom: 1.4rem;
+}
+
+.status strong {
+    color: #ffffff;
+    font-weight: 700;
+}
+
+/* カテゴリ表示を強調 */
+.category {
+    display: inline-block;
+    background: rgba(78, 204, 163, 0.15);
+    color: #4ecca3;
+    font-weight: 700;
+    padding: 4px 10px;
+    border-radius: 999px;
+    font-size: 0.85rem;
+    margin-left: 6px;
+}
+
+/* 質問ブロック */
+.question-box {
+    background: #2f314d;
+    border-radius: 16px;
+    padding: 1.6rem;
+    margin-bottom: 1.5rem;
+}
+
+/* 質問文 */
+.question {
+    font-size: 1.35rem;
+    font-weight: 700;
+    margin-bottom: 1.4rem;
+    line-height: 1.5;
+    color: #ffffff;
+}
+
+/* 選択肢 */
 .options {
     display: flex;
     flex-direction: column;
-    gap: 0.8rem;
+    gap: 1rem;
 }
 
 .optionBtn {
-    background: #4ecca3;
-    border: none;
-    padding: 12px;
-    border-radius: 10px;
-    font-weight: bold;
+    background: #222b45;
+    border: 2px solid transparent;
+    padding: 14px 16px;
+    border-radius: 14px;
+    font-size: 1rem;
+    font-weight: 600;
+    color: #ffffff;
     cursor: pointer;
-    color: #0f0f1a;
+    transition: all 0.2s ease;
+    text-align: left;
 }
 
-.progress {
-    margin-top: 1rem;
-    opacity: 0.8;
+.optionBtn:hover {
+    background: #4ecca3;
+    color: #0f0f1a;
+    transform: translateY(-1px);
+}
+
+/* 選択中（JSで class 付与してたら効く） */
+.optionBtn.selected {
+    background: #4ecca3;
+    color: #0f0f1a;
+    border-color: #4ecca3;
+}
+
+/* フッターメモ */
+.note {
+    margin-top: 1.2rem;
+    font-size: 0.85rem;
+    opacity: 0.75;
 }

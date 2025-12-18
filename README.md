@@ -15,6 +15,10 @@
 - 数値とビジュアルで「相性」を可視化
 - 合コンで自然に会話が生まれる設計
 
+<img width="2175" height="1303" alt="image" src="https://github.com/user-attachments/assets/4398fef3-e85b-4555-b315-01ef3b5a7558" />
+
+
+
 ## 🧩 主な機能
 
 ### ① 参加者登録（entry.html）

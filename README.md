@@ -10,7 +10,8 @@ HTML / CSS / JavaScript（フレームワークなし）
 - result.html : 結果表示
 
 ## 起動方法
- python3 -m http.server 8000
+
+python3 -m http.server 8000
 entry.html をブラウザで開く
 
 ## ディレクトリ構成
@@ -21,13 +22,14 @@ blind-sync/
 ├── questions.html   # 質問ページ
 ├── result.html      # 結果ページ
 ├── css/
-│   └── style.css
+│   ├── common.css
+│   ├── entry.css
+│   ├── questions.css
+│   └── result.css
 ├── js/
 │   ├── entry.js
 │   ├── questions.js
-│   ├── result.js
-│   ├── logic.js     # 相性計算
-│   └── data.js      # 質問・初期点（仮）
+│   └── result.js
 ├── data/
 │   ├── questions.json
 │   ├── initial_scores/
@@ -35,26 +37,15 @@ blind-sync/
 │   │   ├ money.json
 │   │   ├ social.json
 │   │   └ lifestyle.json
-│   ├── advice.json
 │   └── advice.json
 └── README.md
 ```
 
-## JS の役割
+## 残りのタスク
 
-| ファイル     | 役割                          |
-| ------------ | ----------------------------- |
-| entry.js     | 参加者登録・localStorage 保存 |
-| questions.js | 質問進行・回答保存            |
-| logic.js     | 相性計算（純ロジック）        |
-| result.js    | 結果描画                      |
-| data.js      | 質問・初期点データ            |
-
-## データ
-
-| データ | key            |
-| ------ | -------------- |
-| 参加者 | `participants` |
-| 質問   | `questions`    |
-| 回答   | `answers`      |
-| 結果   | `results`      |
+- 改善：UI 改善（特に質問ページ、言葉や取捨選択など）
+- 改善：結果ページのアコーディオンメニューを正確にすべての組み合わせで表示されるように
+- 追加機能：結果ページへ質問リスト、ユーザごとの回答を表示
+- 追加機能：相性バーの色を高得点や低い得点で変更＆結果発表アニメーション？？
+- 追加機能：お酒の加点も追加？？
+- 確認：初期点、質問、アドバイスがみんなの考えたものと一致しているかの確認

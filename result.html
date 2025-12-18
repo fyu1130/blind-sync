@@ -2,23 +2,29 @@
 <html lang="ja">
 
 <head>
-    <meta charset="UTF-8">
-    <title>Blind Sync - Result</title>
-        <link rel="stylesheet" href="css/common.css">
-        <link rel="stylesheet" href="css/result.css">
+    <meta charset="UTF-8" />
+    <title>結果 | Blind Sync</title>
+
+    <link rel="stylesheet" href="css/common.css" />
+    <link rel="stylesheet" href="css/result.css" />
 </head>
 
 <body>
-
-    <main class="container">
+    <div class="container">
         <div class="card">
-            <h1>💘 Blind Sync — 結果発表</h1>
-            <div id="ranking"></div>
-            <button onclick="location.href='entry.html'">🔁 もう一度</button>
-        </div>
-    </main>
 
-    <script src="js/logic.js"></script>
+            <h1 class="title">💘 相性ランキング</h1>
+            <p class="subtitle">初期相性 × 質問一致による総合スコア</p>
+
+            <div id="result" class="resultList"></div>
+
+            <p class="note">
+                ※ スコアは参考値です。高いほど相性が良い傾向を示します。
+            </p>
+
+        </div>
+    </div>
+
     <script src="js/result.js"></script>
 </body>
 

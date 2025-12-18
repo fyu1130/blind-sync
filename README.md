@@ -10,7 +10,7 @@ HTML / CSS / JavaScript（フレームワークなし）
 - result.html : 結果表示
 
 ## 起動方法
-
+ python3 -m http.server 8000
 entry.html をブラウザで開く
 
 ## ディレクトリ構成

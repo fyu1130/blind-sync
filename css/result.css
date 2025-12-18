@@ -1,17 +1,48 @@
-/* result.css */
+/* ==============================
+   Result Page Style
+============================== */
+
+.title {
+    text-align: center;
+    margin-bottom: 0.2rem;
+}
+
+.subtitle {
+    text-align: center;
+    font-size: 0.9rem;
+    opacity: 0.8;
+    margin-bottom: 1rem;
+}
+
+.resultList {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+/* ---------- ランキング行 ---------- */
 .resultRow {
     background: #2f314d;
-    padding: 1rem;
-    margin-bottom: 10px;
-    border-radius: 12px;
+    padding: 14px;
+    border-radius: 14px;
+    cursor: pointer;
+    transition: background 0.2s ease;
+}
+
+.resultRow:hover {
+    background: #3a3c5f;
+}
+
+/* ---------- 上段 ---------- */
+.resultHeader {
     display: flex;
     align-items: center;
     gap: 12px;
 }
 
-.pair {
-    width: 35%;
+.rank {
     font-weight: bold;
+    width: 90px;
 }
 
 .gaugeWrapper {
@@ -24,11 +55,33 @@
 
 .gauge {
     height: 100%;
-    background: #4ecca3;
+    background: linear-gradient(90deg, #4ecca3, #7ee6c5);
+    transition: width 0.4s ease;
 }
 
 .score {
-    width: 50px;
+    width: 60px;
     text-align: right;
     font-weight: bold;
+}
+
+/* ---------- 詳細 ---------- */
+.resultDetail {
+    display: none;
+    margin-top: 10px;
+    font-size: 0.9rem;
+    line-height: 1.5;
+    opacity: 0.95;
+}
+
+.resultRow.open .resultDetail {
+    display: block;
+}
+
+/* ---------- フッター ---------- */
+.note {
+    margin-top: 1rem;
+    font-size: 0.8rem;
+    opacity: 0.7;
+    text-align: center;
 }

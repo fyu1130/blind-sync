@@ -2,6 +2,7 @@
    Result Page Style
 ============================== */
 
+/* ---------- タイトル ---------- */
 .title {
     text-align: center;
     margin-bottom: 0.2rem;
@@ -11,8 +12,68 @@
     text-align: center;
     font-size: 0.9rem;
     opacity: 0.8;
-    margin-bottom: 1rem;
+    margin-bottom: 1.2rem;
 }
+
+/* ==============================
+   質問 × 回答サマリー（縦並び）
+============================== */
+
+.qaSummary {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    margin-bottom: 22px;
+}
+
+/* 各カテゴリブロック */
+.qaBlock {
+    background: #2a2c46;
+    border-radius: 14px;
+    padding: 14px;
+    border: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+/* カテゴリ名（MONEY / TIME etc） */
+.qaCategory {
+    font-weight: bold;
+    font-size: 0.75rem;
+    opacity: 0.75;
+    letter-spacing: 0.06em;
+    margin-bottom: 6px;
+}
+
+/* 質問文 */
+.qaQuestion {
+    font-size: 0.9rem;
+    line-height: 1.4;
+    margin-bottom: 10px;
+}
+
+/* 回答テーブル */
+.qaTable {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.8rem;
+}
+
+/* 各行 */
+.qaTable td {
+    padding: 6px 8px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    vertical-align: middle;
+}
+
+/* 左列：名前 */
+.qaTable td:first-child {
+    width: 90px;
+    font-weight: bold;
+    opacity: 0.85;
+}
+
+/* ==============================
+   相性ランキング
+============================== */
 
 .resultList {
     display: flex;
@@ -45,6 +106,7 @@
     width: 90px;
 }
 
+/* ---------- ゲージ ---------- */
 .gaugeWrapper {
     flex: 1;
     height: 12px;
@@ -59,17 +121,30 @@
     transition: width 0.4s ease;
 }
 
+/* スコア帯による色変化 */
+.gauge.high {
+    background: linear-gradient(90deg, #4ade80, #22c55e);
+}
+
+.gauge.mid {
+    background: linear-gradient(90deg, #fde047, #facc15);
+}
+
+.gauge.low {
+    background: linear-gradient(90deg, #f87171, #ef4444);
+}
+
 .score {
     width: 60px;
     text-align: right;
     font-weight: bold;
 }
 
-/* ---------- 詳細 ---------- */
+/* ---------- 詳細（アドバイス） ---------- */
 .resultDetail {
     display: none;
     margin-top: 10px;
-    font-size: 0.9rem;
+    font-size: 0.85rem;
     line-height: 1.5;
     opacity: 0.95;
 }
@@ -78,7 +153,10 @@
     display: block;
 }
 
-/* ---------- フッター ---------- */
+/* ==============================
+   フッター
+============================== */
+
 .note {
     margin-top: 1rem;
     font-size: 0.8rem;

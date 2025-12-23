@@ -1,9 +1,14 @@
+// ==============================
+// result.js（完全版）
+// ==============================
+
 // ---------- localStorage ----------
 const participants = JSON.parse(localStorage.getItem("participants"));
 const answers = JSON.parse(localStorage.getItem("answers"));
+const selectedQuestions = JSON.parse(localStorage.getItem("questions"));
 
-if (!participants || !answers) {
-  alert("データが見つかりません。entry からやり直してください。");
+if (!participants || !answers || !selectedQuestions) {
+  alert("データが見つかりません。entry → questions からやり直してください。");
   throw new Error("missing localStorage data");
 }
 
@@ -12,7 +17,7 @@ function normalizeMBTI(mbti) {
   return String(mbti).trim().toUpperCase();
 }
 
-// ---------- MBTIペアキー生成 ----------
+// ---------- MBTIペアキー ----------
 function makeAdviceKey(a, b) {
   return [a, b].sort().join("_");
 }
@@ -52,45 +57,63 @@ function generatePairs(users) {
 // ---------- 質問一致数 ----------
 function countMatches(category, i, j) {
   if (!answers[category]) return 0;
-
-  let match = 0;
-  for (let q = 0; q < answers[category].length; q++) {
-    if (answers[category][q][i] === answers[category][q][j]) {
-      match++;
-    }
-  }
-  return match;
+  return answers[category].filter(q => q[i] === q[j]).length;
 }
 
 // ---------- スコア計算 ----------
 function calculate(pair, maps, adviceMap) {
   const [a, b] = pair;
-
   const mbtiA = normalizeMBTI(a.mbti);
   const mbtiB = normalizeMBTI(b.mbti);
 
   let total = 0;
 
   ["money", "time", "lifestyle", "social"].forEach(cat => {
-    const scoreTable = maps[cat].scores;
-
-    if (!scoreTable[mbtiA] || scoreTable[mbtiA][mbtiB] == null) {
-      console.warn("Missing score:", cat, mbtiA, mbtiB);
-      return;
-    }
-
-    total += scoreTable[mbtiA][mbtiB];
+    total += maps[cat].scores[mbtiA][mbtiB];
     total += countMatches(cat, a.index, b.index) * 5;
   });
-
-  const adviceKey = makeAdviceKey(mbtiA, mbtiB);
 
   return {
     pair: `${a.name} × ${b.name}`,
     mbti: `${mbtiA} × ${mbtiB}`,
     score: total,
-    advice: adviceMap[adviceKey] || "アドバイス準備中"
+    advice: adviceMap[makeAdviceKey(mbtiA, mbtiB)] || "アドバイス準備中",
   };
+}
+
+// ---------- 質問＋回答サマリー描画 ----------
+function renderQASummary(users) {
+  const root = document.getElementById("qaSummary");
+  const categories = ["money", "time", "lifestyle", "social"];
+
+  root.innerHTML = categories.map(cat => {
+    const q = selectedQuestions[cat];   // ← ランダムで選ばれた質問
+    const ans = answers[cat][0];        // ← 4人分の回答
+
+    const rows = users.map((u, i) => `
+      <tr>
+        <td>${u.name}</td>
+        <td>${q.options[ans[i]]}</td>
+      </tr>
+    `).join("");
+
+    return `
+      <div class="qaBlock">
+        <div class="qaCategory">${cat.toUpperCase()}</div>
+        <div class="qaQuestion">Q. ${q.text}</div>
+        <table class="qaTable">
+          ${rows}
+        </table>
+      </div>
+    `;
+  }).join("");
+}
+
+// ---------- バー色 ----------
+function getBarClass(score) {
+  if (score >= 90) return "high";
+  if (score >= 45) return "mid";
+  return "low";
 }
 
 // ---------- 実行 ----------
@@ -101,45 +124,42 @@ function run(scoreMaps, adviceMap) {
     mbti: normalizeMBTI(p.mbti),
   }));
 
-  const pairs = generatePairs(users);
+  renderQASummary(users);
 
-  const results = pairs
+  const results = generatePairs(users)
     .map(p => calculate(p, scoreMaps, adviceMap))
     .sort((a, b) => b.score - a.score);
 
-  render(results);
+  renderResults(results);
 }
 
-// ---------- 描画 ----------
-function render(results) {
+// ---------- ランキング描画 ----------
+function renderResults(results) {
   const root = document.getElementById("result");
+  root.innerHTML = "";
 
   results.forEach((r, i) => {
-    const row = document.createElement("div");
-    row.className = "resultRow";
-
     const barWidth = Math.min(r.score, 150);
 
-    row.innerHTML = `
-      <div class="resultHeader">
-        <div class="rank">${i + 1}位｜${r.pair}</div>
-        <div class="gaugeWrapper">
-          <div class="gauge" style="width:${barWidth}%"></div>
+    root.innerHTML += `
+      <div class="resultRow">
+        <div class="resultHeader">
+          <div class="rank">${i + 1}位｜${r.pair}</div>
+          <div class="gaugeWrapper">
+            <div class="gauge ${getBarClass(r.score)}" style="width:${barWidth}%"></div>
+          </div>
+          <div class="score">${r.score}%</div>
         </div>
-        <div class="score">${r.score}%</div>
-      </div>
-
-      <div class="resultDetail">
-        <strong>MBTI：</strong>${r.mbti}<br />
-        ${r.advice}
+        <div class="resultDetail">
+          <strong>MBTI：</strong>${r.mbti}<br />
+          ${r.advice}
+        </div>
       </div>
     `;
+  });
 
-    row.addEventListener("click", () => {
-      row.classList.toggle("open");
-    });
-
-    root.appendChild(row);
+  document.querySelectorAll(".resultRow").forEach(row => {
+    row.addEventListener("click", () => row.classList.toggle("open"));
   });
 }
 

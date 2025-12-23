@@ -1,7 +1,3 @@
-// ==============================
-// result.js（最終・完全安定版）
-// ==============================
-
 // ---------- localStorage ----------
 const participants = JSON.parse(localStorage.getItem("participants"));
 const answers = JSON.parse(localStorage.getItem("answers"));
@@ -14,6 +10,11 @@ if (!participants || !answers) {
 // ---------- MBTI正規化 ----------
 function normalizeMBTI(mbti) {
   return String(mbti).trim().toUpperCase();
+}
+
+// ---------- MBTIペアキー生成 ----------
+function makeAdviceKey(a, b) {
+  return [a, b].sort().join("_");
 }
 
 // ---------- JSON読み込み ----------
@@ -73,8 +74,7 @@ function calculate(pair, maps, adviceMap) {
   ["money", "time", "lifestyle", "social"].forEach(cat => {
     const scoreTable = maps[cat].scores;
 
-    // ---- ガード（ここが超重要）----
-    if (!scoreTable[mbtiA] || !scoreTable[mbtiA][mbtiB]) {
+    if (!scoreTable[mbtiA] || scoreTable[mbtiA][mbtiB] == null) {
       console.warn("Missing score:", cat, mbtiA, mbtiB);
       return;
     }
@@ -83,11 +83,13 @@ function calculate(pair, maps, adviceMap) {
     total += countMatches(cat, a.index, b.index) * 5;
   });
 
+  const adviceKey = makeAdviceKey(mbtiA, mbtiB);
+
   return {
     pair: `${a.name} × ${b.name}`,
     mbti: `${mbtiA} × ${mbtiB}`,
     score: total,
-    advice: adviceMap[`${mbtiA}_${mbtiB}`] || "アドバイス準備中"
+    advice: adviceMap[adviceKey] || "アドバイス準備中"
   };
 }
 
@@ -140,7 +142,6 @@ function render(results) {
     root.appendChild(row);
   });
 }
-
 
 // ---------- 開始 ----------
 init();

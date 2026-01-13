@@ -1,31 +1,52 @@
 /* entry.css */
+
+/* =========================
+   Chat window
+========================= */
 .chatWindow {
     height: 60vh;
+    /* PC基準 */
     overflow-y: auto;
     padding-bottom: 1rem;
+
+    /* スマホのスクロール体験を改善 */
+    -webkit-overflow-scrolling: touch;
+    overscroll-behavior: contain;
 }
 
-.bot {
-    background: #222b45;
+/* =========================
+   Messages
+========================= */
+.bot,
+.user {
     padding: 10px 14px;
     border-radius: 12px;
     margin-bottom: 10px;
     max-width: 80%;
+
+    /* 文章が長い時に崩れない */
+    word-break: break-word;
+    overflow-wrap: anywhere;
+    white-space: pre-wrap;
+}
+
+.bot {
+    background: #222b45;
 }
 
 .user {
     background: #4ecca3;
     color: #0f0f1a;
-    padding: 10px 14px;
-    border-radius: 12px;
-    margin-bottom: 10px;
     margin-left: auto;
-    max-width: 80%;
 }
 
+/* =========================
+   Input Area
+========================= */
 .inputArea {
     display: flex;
     gap: 8px;
+    align-items: stretch;
 }
 
 .inputArea input,
@@ -34,6 +55,10 @@
     padding: 10px;
     border-radius: 8px;
     border: none;
+    background-color: #0f0f1a;
+
+    /* スマホでも押しやすい最低サイズ */
+    min-height: 44px;
 }
 
 .inputArea button {
@@ -43,4 +68,39 @@
     padding: 10px 16px;
     font-weight: bold;
     cursor: pointer;
+
+    min-height: 44px;
+}
+
+/* =========================
+   Mobile (smartphone)
+========================= */
+@media (max-width: 600px) {
+
+    /* 画面下の入力欄 + キーボードで窮屈になるので少し調整 */
+    .chatWindow {
+        height: 56svh;
+        /* iOS/Androidの“安全なvh” */
+        height: 56vh;
+        /* fallback */
+        padding-bottom: 0.75rem;
+    }
+
+    .bot,
+    .user {
+        max-width: 92%;
+        padding: 12px 14px;
+        /* ちょい読みやすく */
+    }
+
+    /* 入力は縦積みで横はみ出し防止 */
+    .inputArea {
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .inputArea button {
+        width: 100%;
+        padding: 12px 16px;
+    }
 }

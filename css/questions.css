@@ -1,5 +1,5 @@
 /* ===============================
-   questions.css（UI強化版）
+   questions.css（UI強化版 + スマホ対応）
    =============================== */
 
 /* 全体 */
@@ -86,6 +86,10 @@
     cursor: pointer;
     transition: all 0.2s ease;
     text-align: left;
+
+    /* 長文で崩れない */
+    word-break: break-word;
+    overflow-wrap: anywhere;
 }
 
 .optionBtn:hover {
@@ -106,4 +110,70 @@
     margin-top: 1.2rem;
     font-size: 0.85rem;
     opacity: 0.75;
+}
+
+/* =========================
+   Mobile (smartphone)
+========================= */
+@media (max-width: 600px) {
+    .question-container {
+        border-radius: 16px;
+        padding: 1.1rem;
+    }
+
+    .question-title {
+        font-size: 1.5rem;
+        gap: 10px;
+        margin-bottom: 0.9rem;
+    }
+
+    .status {
+        font-size: 0.95rem;
+        margin-bottom: 1rem;
+    }
+
+    .category {
+        font-size: 0.9rem;
+        padding: 5px 10px;
+
+        /* 文字数次第で窮屈になるので余計な左マージンを消す */
+        margin-left: 0;
+        margin-top: 6px;
+    }
+
+    .question-box {
+        border-radius: 14px;
+        padding: 1.1rem;
+        margin-bottom: 1.1rem;
+    }
+
+    .question {
+        font-size: 1.15rem;
+        margin-bottom: 1rem;
+    }
+
+    .options {
+        gap: 0.8rem;
+    }
+
+    .optionBtn {
+        font-size: 1.05rem;
+        padding: 14px 14px;
+        border-radius: 12px;
+
+        /* スマホで誤タップ減らす */
+        min-height: 48px;
+    }
+
+    /* hoverがない端末向け：押した瞬間の見た目 */
+    .optionBtn:active {
+        background: #4ecca3;
+        color: #0f0f1a;
+        transform: translateY(0);
+    }
+
+    .note {
+        font-size: 0.9rem;
+        margin-top: 1rem;
+    }
 }

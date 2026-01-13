@@ -1,23 +1,153 @@
 /* common.css */
-body {
-    margin: 0;
-    font-family: system-ui, sans-serif;
+
+/* =========================
+   Base
+========================= */
+:root {
+    /* spacing / sizing */
+    --page-pad: clamp(12px, 3vw, 24px);
+    --card-pad: clamp(14px, 3vw, 22px);
+    --radius: 16px;
+
+    /* typography */
+    --font: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans JP", sans-serif;
+    --text: clamp(14px, 1.8vw, 16px);
+    --title: clamp(18px, 3vw, 24px);
+
+    /* colors */
+    --bg: #252541;
+    --card: #393950;
+    --text-color: #ffffff;
+
+    /* layout */
+    --maxw: 650px;
 }
 
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
+html,
+body {
+    height: 100%;
+}
+
+body {
+    margin: 0;
+    font-family: var(--font);
+    font-size: var(--text);
+    line-height: 1.6;
+    color: var(--text-color);
+    background: var(--bg);
+    overflow-x: hidden;
+    /* 横スクロール事故防止 */
+}
+
+/* 画像・SVG・canvasが横にはみ出す事故防止 */
+img,
+svg,
+canvas {
+    max-width: 100%;
+    height: auto;
+    display: block;
+}
+
+/* =========================
+   Layout
+========================= */
 .container {
+    min-height: 100vh;
     display: flex;
     justify-content: center;
     align-items: center;
-    min-height: 100vh;
-    background: #252541;
-    color: white;
+
+    /* スマホで端が詰まらないように */
+    padding: var(--page-pad);
 }
 
+/* =========================
+   Card
+========================= */
 .card {
     width: 100%;
-    max-width: 650px;
-    background: #393950;
-    border-radius: 16px;
-    padding: 1rem;
+    max-width: var(--maxw);
+    background: var(--card);
+    border-radius: var(--radius);
+
+    /* padding は画面幅に合わせて可変 */
+    padding: var(--card-pad);
+
     box-shadow: 0 0 40px rgba(0, 0, 0, 0.35);
+}
+
+/* =========================
+   Forms / Buttons (汎用)
+   ※ 既存ページで input や button があるなら効く
+========================= */
+button,
+input,
+select,
+textarea {
+    font: inherit;
+}
+
+input,
+select,
+textarea {
+    width: 100%;
+    padding: 10px 12px;
+    border-radius: 12px;
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    background: rgba(255, 255, 255, 0.06);
+    color: var(--text-color);
+    outline: none;
+}
+
+input:focus,
+select:focus,
+textarea:focus {
+    border-color: rgba(255, 255, 255, 0.28);
+}
+
+button {
+    min-height: 44px;
+    /* スマホで押しやすい */
+    padding: 10px 14px;
+    border-radius: 12px;
+    border: 0;
+    cursor: pointer;
+}
+
+/* =========================
+   Mobile tweaks
+========================= */
+@media (max-width: 600px) {
+
+    /* スマホは文字サイズ固定で18px */
+    :root {
+        --text: 18px;
+        --title: 28px;
+        /* タイトルも一段上げる（不要なら消してOK） */
+    }
+
+    .container {
+        align-items: center;
+    }
+
+    .card {
+        border-radius: 14px;
+    }
+
+    /* ついでに操作系も少し大きく（押しやすさ） */
+    button {
+        min-height: 48px;
+    }
+
+    input,
+    select,
+    textarea {
+        padding: 12px 14px;
+    }
 }
